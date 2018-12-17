@@ -990,11 +990,11 @@ const PUZZLE_INPUT = `+16
 
 const puzzleInputArr = PUZZLE_INPUT.split('\n').map(item => Number(item));
 
-/*  Part 1 */
+/* Part 1 */
 // result
 const resultingFrequency = puzzleInputArr.reduce((acc, val) => acc + val); // 439
 
-/*  Part 2 */
+/* Part 2 */
 // helpers
 const hasDuplicates = (arr) => (new Set(arr)).size !== arr.length;
 
@@ -1045,7 +1045,12 @@ const getFirstFrequency = (arr) => {
 const firstFrequency = getFirstFrequency(puzzleInputArr); // 124645
 
 // test cases
-const testCase1FirstFrequency = getFirstFrequency([1, -1]); // 0
-const testCase2FirstFrequency = getFirstFrequency([3, 3, 4, -2, -4]); // 10
-const testCase3FirstFrequency = getFirstFrequency([-6, 3, 8, 5, -6]); // 5
-const testCase4FirstFrequency = getFirstFrequency([7, 7, -2, -7, -4]); // 14
+const TEST_INPUT_1 = [1, -1];
+const TEST_INPUT_2 = [3, 3, 4, -2, -4];
+const TEST_INPUT_3 = [-6, 3, 8, 5, -6];
+const TEST_INPUT_4 = [7, 7, -2, -7, -4];
+
+const testCase1FirstFrequency = getFirstFrequency(TEST_INPUT_1); // 0
+const testCase2FirstFrequency = getFirstFrequency(TEST_INPUT_2); // 10
+const testCase3FirstFrequency = getFirstFrequency(TEST_INPUT_3); // 5
+const testCase4FirstFrequency = getFirstFrequency(TEST_INPUT_4); // 14

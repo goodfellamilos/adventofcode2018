@@ -249,9 +249,9 @@ cgirmcjvlhedbsyoqfiuonpxwt
 ayirmcjvlhedbsyaqfzuknwxwt
 agirmcjvlhedbdyoqbzwknpxwt`;
 
-const puzzleInputArr = PUZZLE_INPUT.split('\n').map(item => item.split(''));
+const puzzleInputArr = PUZZLE_INPUT.split('\n');
 
-/*  Part 1 */
+/* Part 1 */
 // helpers
 const findAllAppearancesOfOneLetterInGivenPhrase = (arr, letter) => {
   let numberOfAppearances = 0;
@@ -285,7 +285,8 @@ const getFinalChecksum = (arrOfIds) => {
 };
 
 // result
-const finalChecksum = getFinalChecksum(puzzleInputArr); // 5434
+const puzzleInputArrOfArrs = puzzleInputArr.map(item => item.split(''));
+const finalChecksum = getFinalChecksum(puzzleInputArrOfArrs); // 5434
 
 // test cases
 const TEST_INPUT = `abcdef
@@ -295,5 +296,53 @@ abcccd
 aabcdd
 abcdee
 ababab`;
-const testInputArr = TEST_INPUT.split('\n').map(item => item.split(''));
-const testCaseFinalCheksum = getFinalChecksum(testInputArr); // 12
+const testInputArrOfArr = TEST_INPUT.split('\n').map(item => item.split(''));
+const testCaseFinalCheksum = getFinalChecksum(testInputArrOfArr); // 12
+
+/* Part 2 */
+// helpers
+const getCommonLettersBetweenTwoStrings = (str1, str2) => {
+  const arr1 = str1.split('');
+  const arr2 = str2.split('');
+  const commonLetters = [];
+
+  arr1.forEach((letter, index) => {
+    if (letter === arr2[index]) {
+      commonLetters.push(letter);
+    }
+  })
+
+  return commonLetters;
+}
+
+const getResultCommonLetters = (arrOfStrings, i = 0) => {
+  let commonLetters = [];
+
+  for (let j = i + 1; j < arrOfStrings.length; j++) {
+    commonLetters = getCommonLettersBetweenTwoStrings(arrOfStrings[i], arrOfStrings[j]);
+
+    if (commonLetters.length === arrOfStrings[0].length || commonLetters.length === arrOfStrings[0].length - 1) {
+      return commonLetters.join('');
+    }
+  }
+
+  i += 1;
+
+  if (i < arrOfStrings.length - 2) {
+    return getResultCommonLetters(arrOfStrings, i);
+  }
+}
+
+// result
+const resultCommonLetters = getResultCommonLetters(puzzleInputArr); // agimdjvlhedpsyoqfzuknpjwt
+
+// test cases
+const TEST_INPUT_2 = `abcde
+fghij
+klmno
+pqrst
+fguij
+axcye
+wvxyz`;
+const testInputArr2 = TEST_INPUT_2.split('\n');
+const testCaseCommonLetters = getResultCommonLetters(testInputArr2); // fgij
